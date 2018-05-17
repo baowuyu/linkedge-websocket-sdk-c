@@ -31,7 +31,7 @@
 设备注册，上线，上报属性，上报事件，获取属性，调用方法等业务需求。
 
 ## Brief introduction
-This document defines a JSON protocol for device access to Alibaba Cloud IoT LinkEdge. Device end as client, LinkEdge as server. Based on this protocol it  complete the registry, online, report properties, report events, get properties, call methods and other business requirements of the devices.
+This document defines a JSON protocol for device to access Alibaba Cloud IoT LinkEdge. Device end is used as client, while LinkEdge as server. Based on this protocol the registry, online, report properties, report events, get properties, call methods and other business requirements of the devices is completed.
 
 
 ## 消息体格式
@@ -80,7 +80,7 @@ payload：反馈payload
 - Request
 
 ```ruby
-method:     command word，include (registerDevice,onlineDevice,offlineDevice,reportProperty,reportEvent,setProperty,getProperty,callService)
+method:     command word, include (registerDevice,onlineDevice,offlineDevice,reportProperty,reportEvent,setProperty,getProperty,callService)
 msgId:      Message number that uniquely identifies this message and the feedback message responded by LinkEdge carries the same id as the message.
 version:    Protocol version number, which is used to identify the protocol version number used for the communication, the current version is v0.1.
 productKey: Product serial number, bound to device profile file, this serial number is provided by Alibaba Cloud.
@@ -104,7 +104,7 @@ Example
 
 - Reply
 ```
-msgId: Message number，the number request command is the same
+msgId: Message number, the same with the number request command
 code： Reply results, detailed in the instructions of each command
 payload： Reply payload
 ```
@@ -151,7 +151,7 @@ payload：空(null)
 
 ## Device register
 - client->server
-- The device which connect to LinkEdge first time need to register device information from LinkEdge
+- The device which connect to LinkEdge for the first time need to register device information from LinkEdge.
 
 - command format
 
@@ -243,7 +243,7 @@ payload：空(null)
 ```
 ## Device offline
 - client->server
-- After the device is offline, call the device offline command, notify the edge gateway device off the line, after the device is online again, it do not need to register again, just need to report the device to be online
+- After the device is offline, call the device offline command, notify the edge gateway device off the line, after the device is online again, it do not need to register again, just need to report the device to be online.
 - command format
 
 ```
@@ -292,9 +292,12 @@ payload：空(null)
 ```
 
 ## Report properties
-•	client->server
-•	After the device is online successfully, report total properties, other properties according to the actual operation of the device 
-•	command format
+- client->server
+- After the device is online successfully, report total properties. Other properties should be reported according to the actual operation of the device.
+
+- command format
+
+```
 {
     "method":"reportProperty",
     "msgId":  11,
@@ -306,9 +309,12 @@ payload：空(null)
         "humidity":50
     }
 }
-•	return results
+```
+- return results
+```
 code： 0 device register successfully, 102 device not registered, 106 device not online
 payload：null
+```
 
 ## 上报事件
 
@@ -405,7 +411,7 @@ payload：设置成功，反馈执行后属性值，如果与设置值完全一�
 ```
 ## Set properties
 - server->client
-- Edge gateways set device properties
+- Edge gateways set device properties.
 
 - command format
 
@@ -425,7 +431,7 @@ payload：设置成功，反馈执行后属性值，如果与设置值完全一�
 - return results
 ```
 code：0 set successfully，105 device offline
-payload： Set successfully, then feedback the property value that has been set, if it is exactly the same as the setting value, directly feedback the payload in the set command.
+payload： Set successfully, then feedback the property value that has been set. If it is exactly the same as the setting value, directly feedback the payload in the set command.
 ```
 
 ## 获取属性
@@ -461,12 +467,13 @@ payload：反馈获取的属性状态，以key-value方式，如："payload":{"t
 
 ## Get properties
 - server->client
-- Edge gateways get device properties
+- Edge gateways get device properties.
 
 ```
 list： List of properties to get
 ```
 - command format
+
 ```
 {
     "method":"getProperty",
@@ -482,7 +489,7 @@ list： List of properties to get
 
 - return results
 ```
-code：0 set successfully，105 device offline
+code：0 set successfully, 105 device offline
 payload： Feedback obtained property state in the way of key-value, e.g.
 "payload":{"temperature":25,"humidity":50}
 ```
@@ -560,7 +567,7 @@ payload：Feedback execution results with output content defined in profile, fee
 ![image](http://git.cn-hangzhou.oss-cdn.aliyun-inc.com/uploads/iot-gateway/gateway/26e509f1840389a7a96c55ab259635e9/image.png)
 
 ## 注意事项
-## Attentions
+## Notes
 
 * deviceId必须只能是由字母和数字组成，不能包含任何其他字符。
 * DeviceId must consist only of letters and numbers and not contain any other characters.

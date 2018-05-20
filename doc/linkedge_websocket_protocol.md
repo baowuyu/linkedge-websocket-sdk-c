@@ -560,9 +560,9 @@ payload：Feedback execution results with output content defined in profile, fee
 ![image](http://git.cn-hangzhou.oss-cdn.aliyun-inc.com/uploads/iot-gateway/gateway/26e509f1840389a7a96c55ab259635e9/image.png)
 
 ## 注意事项
-## Attentions
+## Notes
 
 * deviceId必须只能是由字母和数字组成，不能包含任何其他字符。
-* DeviceId must consist only of letters and numbers and not contain any other characters.
+* DeviceId must consist only of letters and numbers and without any other characters.
 
 
